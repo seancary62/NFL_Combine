@@ -7,7 +7,7 @@ from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
 
-#import sklearn
+# Import sklearn
 from sklearn.preprocessing import MinMaxScaler
 
 current_year = datetime.now().year
@@ -94,6 +94,7 @@ combine_df.loc[(combine_df['Name']=='Jacoby Ford') & (combine_df['College']=='Cl
 combine_df = combine_df.loc[(combine_df['Name'] != 'Trindon Holliday')]
 
 
+
 ###### CREATE A DATAFRAME FOR RECORD HOLDERS ######
 
 # Get records for all combine data
@@ -157,3 +158,9 @@ combine_df_scaled = df_info.merge(df_scaled,left_index=True, right_index=True)
 # Reverse order for speed measure so that faster times are the max
 for col in ['40 Yard', 'Shuttle', '3Cone']:
     combine_df_scaled[col] = 1 - combine_df_scaled[col]
+
+
+###### STORE THE DATA ######
+combine_df.to_csv('resources/combine_df.csv', index=False)
+combine_df_scaled.to_csv('resources/combine_df_scaled.csv', index=False)
+records_players_df.to_csv('resources/records_players_df.csv', index=False)
