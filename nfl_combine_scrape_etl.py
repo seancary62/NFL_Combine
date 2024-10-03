@@ -1,3 +1,8 @@
+###### SCRAPE AND TRANSIFORM DATA FOR THE DASHBOARD ######
+# Code from the NFL_Combine_Scrap and NFL_Combine_Transform_Explore 
+# is refractored here. This script can be scheduled to run yearly
+# To update the results.
+
 # Import libraries
 import numpy as np 
 import pandas as pd 
@@ -153,7 +158,9 @@ df_scaled = scaler.fit_transform(df_values.to_numpy())
 df_scaled = pd.DataFrame(df_scaled, columns=[
   'Height (in)', 'Weight (lbs)', 'BMI', '40 Yard', 'Bench Press', 'Vert Leap (in)', 'Broad Jump (in)', 'Shuttle', '3Cone'])
  
-combine_df_scaled = df_info.merge(df_scaled,left_index=True, right_index=True)
+comb
+
+ine_df_scaled = df_info.merge(df_scaled,left_index=True, right_index=True)
 
 # Reverse order for speed measure so that faster times are the max
 for col in ['40 Yard', 'Shuttle', '3Cone']:
