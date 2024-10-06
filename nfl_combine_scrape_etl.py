@@ -98,22 +98,24 @@ combine_df.loc[(combine_df['Name']=='Spencer Brown') & (combine_df['College']=='
 combine_df.loc[(combine_df['Name']=='Jacoby Ford') & (combine_df['College']=='Clemson'), '40 Yard'] = 4.28
 combine_df = combine_df.loc[(combine_df['Name'] != 'Trindon Holliday')]
 
-
+# combine_df = pd.read_csv('resources/combine_df.csv')
 
 ###### CREATE A DATAFRAME FOR RECORD HOLDERS ######
+
+combine_df_record = combine_df.copy()
 
 # Get records for all combine data
 
 record_stats_df = pd.DataFrame(
-    [{"Max Height (in)":combine_df['Height (in)'].max(),
-      "Max Weight (lbs)":combine_df['Weight (lbs)'].max(),
-      "Max BMI":combine_df["BMI"].max(),
-      "Min 40 Yard":combine_df['40 Yard'].min(),
-      "Max Bench Press":combine_df['Bench Press'].max(), 
-      "Max Vert Leap (in)":combine_df['Vert Leap (in)'].max(),
-      "Max Broad Jump (in)":combine_df['Broad Jump (in)'].max(),
-      "Min Shuttle":combine_df['Shuttle'].min(),
-      "Min 3Cone":combine_df['3Cone'].min(),
+    [{"Max Height (in)":combine_df_record['Height (in)'].max(),
+      "Max Weight (lbs)":combine_df_record['Weight (lbs)'].max(),
+      "Max BMI":combine_df_record["BMI"].max(),
+      "Min 40 Yard":combine_df_record['40 Yard'].min(),
+      "Max Bench Press":combine_df_record['Bench Press'].max(), 
+      "Max Vert Leap (in)":combine_df_record['Vert Leap (in)'].max(),
+      "Max Broad Jump (in)":combine_df_record['Broad Jump (in)'].max(),
+      "Min Shuttle":combine_df_record['Shuttle'].min(),
+      "Min 3Cone":combine_df_record['3Cone'].min(),
     }])
 
 # Transpose the dataframe:
@@ -125,14 +127,14 @@ record_stats_df_trans.Values = record_stats_df_trans.Values.round(2)
 # Get all rows wth record holders
 
 records_df = pd.DataFrame()
-val_columns = combine_df.columns[4:]
+val_columns = combine_df_record.columns[4:]
 
 for item in val_columns:
     try:
         if item == '40 Yard' or item =='Shuttle' or item =='3Cone':
-            records_df = records_df.append(combine_df.loc[combine_df[item] == combine_df[item].min()])
+            records_df = records_df.append(combine_df_record.loc[combine_df[item] == combine_df_record[item].min()])
         else:
-            records_df = records_df.append(combine_df.loc[combine_df[item] == combine_df[item].max()])
+            records_df = records_df.append(combine_df_record.loc[combine_df[item] == combine_df_record[item].max()])
     except:
         print('not a number column')
 
@@ -140,6 +142,7 @@ records_df.reset_index(drop=True,inplace=True)
 records_df.drop(records_df.iloc[:,4:],inplace=True,axis=1)
 
 # Combine transposed data with record holder data
+
 records_players_df = records_df.merge(record_stats_df_trans,left_index=True,right_index=True)
 
 
@@ -147,20 +150,25 @@ records_players_df = records_df.merge(record_stats_df_trans,left_index=True,righ
 # This dataframe will be used for some visuals in
 # PowerBI and determining the most well rounded
 # athletes. It may also be used for machine learning.
+combine_df_scale = combine_df.copy()
 
 scaler = MinMaxScaler()
 
-df_values = combine_df.drop(['Name','Year','College','POS'], axis=1)
-df_info = combine_df.drop(['Height (in)', 'Weight (lbs)', 'BMI', '40 Yard', 'Bench Press', 'Vert Leap (in)', 'Broad Jump (in)', 'Shuttle', '3Cone'],axis=1)
+df_values = combine_df_scale.drop(['Name','Year','College','POS'], axis=1)
+df_info = combine_df_scale.drop(['Height (in)', 'Weight (lbs)', 'BMI', '40 Yard', 'Bench Press', 'Vert Leap (in)', 'Broad Jump (in)', 'Shuttle', '3Cone'],axis=1)
 
 
 df_scaled = scaler.fit_transform(df_values.to_numpy())
 df_scaled = pd.DataFrame(df_scaled, columns=[
   'Height (in)', 'Weight (lbs)', 'BMI', '40 Yard', 'Bench Press', 'Vert Leap (in)', 'Broad Jump (in)', 'Shuttle', '3Cone'])
  
-comb
+print("df values: ", df_values.shape)
+print("df info: ", df_info.shape)
+print("df scaled: ", df_scaled.shape)
 
-ine_df_scaled = df_info.merge(df_scaled,left_index=True, right_index=True)
+df_info.reset_index(drop=True, inplace=True)
+df_scaled.reset_index(drop=True, inplace=True)
+combine_df_scaled = df_info.merge(df_scaled,left_index=True, right_index=True)
 
 # Reverse order for speed measure so that faster times are the max
 for col in ['40 Yard', 'Shuttle', '3Cone']:
