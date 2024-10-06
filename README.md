@@ -1,10 +1,10 @@
 # NFL Combine Analysis and Machine Learning
 [Link to Dashboard](https://scary62.pythonanywhere.com/001Combine.html)!
 
-![](images/Github_Readme/dashboard_view.png)
+![](images/Github_Readme/Dashboard_Front.png)
 ##### Dashboard Front Page
 
-![](images/Github_Readme/dashboard_view.png)
+![](images/Github_Readme/Dashboard_Page.png)
 ##### Stat and Analysis Page View
 
 ## Introduction:
