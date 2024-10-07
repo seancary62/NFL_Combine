@@ -1,11 +1,11 @@
 # NFL Combine Analysis and Machine Learning
 [Link to Dashboard](https://scary62.pythonanywhere.com/001Combine.html)!
 
-![](images/Github_Readme/Dashboard_Front.png)
 ##### Dashboard Front Page
+![](images/Github_Readme/Dashboard_Front.png)
 
-![](images/Github_Readme/Dashboard_Page.png)
 ##### Stat and Analysis Page View
+![](images/Github_Readme/Dashboard_Page.png)
 
 ## Introduction:
 This project was developed to help athletes assess their potential performance in the NFL Combine based on their size. The project involved scraping NFL Combine data spanning from 1987 to 2024 using BeautifulSoup and Python. The data was  then cleaned and processed to extract valuable insights, which were visualized dynamically using PowerBI.
@@ -71,7 +71,7 @@ One of the main objectives of this project was to provide a means for athletes t
 
 To create a prediction dataset, list comprehension was used to step through the minimum and maximum values for each feature multiplied by 0.95 and 1.05. Itertools and matrix multiplication were used to combine the features into a dataset wich was used to creae predicitons. The 5th and 95th percentiles was used to create upper and lower bounds. The dataset with predictions was saved and added to PowerBI so that users can select their statistics and see the prediciton for their statistics. 
 
-![](images/Github_Readme/combine_predictions.png)
+![](images/Github_Readme/combine_prediction.png)
 ##### Combine Prediction Tool
 
 
