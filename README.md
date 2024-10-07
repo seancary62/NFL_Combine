@@ -20,8 +20,6 @@ Using web scraping techniques, the project retrieved comprehensive NFL Combine d
 #### Athlete Size and 40 Yard Dash Time:
 As a demonstration, I found statistics for atheletes in a similar size range to me. This included athletes with a height range of 71-73" and weight range of 198-203lbs. The analysis revealed a minimum 40 yard dash time of 4.28s, an average of 4.56s, and a maximum of 5.14s.
 
-![](images/Github_Readme/mysize_stats.png)
-
 #### Trends:
 Comparing data from 1987 to the present, it was observed that the average 40 Yard dash time has decreased by 1.5%, indicating an overall improvement in athletic performance over time.
 
